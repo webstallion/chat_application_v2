@@ -152,5 +152,79 @@
 				return false;
 			}
 		}
+
+		function get_user_data_by_id(){
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			// Create connection
+			$con = mysqli_connect($servername, $username, $password, "chat_application") or die('connection failed');
+			$user_id=$this->user_id;
+			$sql="Select * from chat_user_table where user_id = '$user_id'";
+			$result=mysqli_query($con,$sql) or die("Sql query failed");
+			if(mysqli_num_rows($result)>0){
+				$user_data=mysqli_fetch_array($result);
+				return $user_data;
+			}
+		}
+
+		function enable_user_account(){
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			// Create connection
+			$con = mysqli_connect($servername, $username, $password, "chat_application") or die('connection failed');
+			$user_status=$this->user_status;
+			$user_varification_code=$this->user_varification_code;
+			$upadate_status="Update chat_user_table set user_status = '$user_status' where user_varification_code = '$user_varification_code'";
+			if(mysqli_query($con,$upadate_status)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		function update_user_login_data(){
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			// Create connection
+			$con = mysqli_connect($servername, $username, $password, "chat_application") or die('connection failed');
+			$user_login_status=$this->user_login_status;
+			$user_id=$this->user_id;
+			$upadate_status="Update chat_user_table set user_login_status = '$user_login_status' where user_id = $user_id";
+			if(mysqli_query($con,$upadate_status)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		function upload_image($user_profile){
+			$extension = explode('.', $user_profile['name']);
+			$new_name = rand() . '.' . $extension[1];
+			$destination = 'images/' . $new_name;
+			move_uploaded_file($user_profile['tmp_name'], $destination);
+			return $destination;
+		}
+
+		function update_data(){
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			// Create connection
+			$con = mysqli_connect($servername, $username, $password, "chat_application") or die('connection failed');
+			$user_id=$this->user_id;
+			$user_name=$this->user_name;
+			$user_email=$this->user_email;
+			$user_password=$this->user_password;
+			$user_profile=$this->user_profile;
+			$upadate_profile="Update chat_user_table set user_name = '$user_name',user_email = '$user_email',user_password = '$user_password',user_profile = '$user_profile' where user_id = $user_id";
+			if(mysqli_query($con,$upadate_profile)){
+				return true;
+			}else{
+				return false;
+			}
+		}
 	}
 ?>

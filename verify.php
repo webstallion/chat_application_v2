@@ -6,12 +6,12 @@
     $user_object->setUserverificationCode($_GET['code']);
     if($user_object->is_valid_email_verification_code()){
       $user_object->setUserStatus('Enable');
-      // if($user_object->enable_user_account()){
-      //   $_Session['success_message']='Your Emailsuccessfully verify, now you can login into this Chat Application';
-      //   header('location:index.php');
-      // }else{
-      //   $error="Something went wrong..";
-      // }
+      if($user_object->enable_user_account()){
+        $_SESSION['success_message']='Your Email successfully verify, now you can login into this Chat Application';
+        header('location:index.php');
+      }else{
+        $error="Something went wrong..";
+      }
     }else{
       $error="Something went wrong..";
     }
@@ -19,14 +19,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <script async='async' src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-4529508631166774",
-          enable_page_level_ads: true
-        });
-      </script>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -39,12 +32,7 @@
     <script src="restaurant-management-system-demo/vendor/jquery/jquery.min.js"></script>
     <script src="restaurant-management-system-demo/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="restaurant-management-system-demo/vendor/parsley/dist/parsley.min.js"></script>
-</head>
-<body>
-</body>
-
+  </head>
+  <body>
+  </body>
 </html>
-
-<script>
-
-</script>
